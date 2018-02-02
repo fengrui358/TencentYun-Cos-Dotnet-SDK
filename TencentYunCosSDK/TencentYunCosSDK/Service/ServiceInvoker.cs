@@ -22,10 +22,7 @@ namespace FrHello.TencentYunCosSDK.Service
                 BaseAddress = new Uri("http://service.cos.myqcloud.com")
             };
 
-            var x = new AuthenticationHeaderValue("23=435345");
-            var xxx = x.ToString();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Sign.Signature());
-            client.DefaultRequestHeaders.Add("Authorization", Sign.Signature());
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", Sign.Signature());
 
             using (var response = await client.GetAsync(string.Empty, cancellationToken))
             {

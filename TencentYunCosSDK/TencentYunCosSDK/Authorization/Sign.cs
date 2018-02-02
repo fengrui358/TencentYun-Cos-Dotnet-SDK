@@ -42,11 +42,18 @@ namespace FrHello.TencentYunCosSDK.Authorization
 
         public static string Signature()
         {
-            return
-                "q6556-erew=a34e";
+            var algorithm = "sha1";
+            var secretId = "AKIDSq7C5mCjFesaCdnxvmU4UiDE4sZ9Zs21";
+            var now = DateTime.Now.ToUnixTime() / 1000;
+            var endTime = DateTime.Now.AddDays(1).ToUnixTime() / 1000;
+            var keyTime = $"{now};{endTime}";
+            var stringToSign =
+                $"q-sign-algorithm={algorithm}&q-ak={secretId}&q-sign-time={keyTime}&q-key-time={keyTime}&q-header-list=host&q-url-param-list=versioning";
+
+
 
             return
-                "q-sign-algorithm=sha1&q-ak=AKIDQjz3ltompVjBni5LitkWHFlFpwkn9U5q&q-sign-time=1480932292;1481012298&q-key-time=1480932292;1481012298&q-header-list=host&q-url-param-list=versioning&q-signature=438023e4a4207299d87bb75d1c739c06cc9406bb";
+                "q-sign-algorithm=sha1&q-ak=&q-sign-time=1480932292;1481012298&q-key-time=1480932292;1481012298&q-header-list=host&q-url-param-list=versioning&q-signature=438023e4a4207299d87bb75d1c739c06cc9406bb";
         }
     }
 }

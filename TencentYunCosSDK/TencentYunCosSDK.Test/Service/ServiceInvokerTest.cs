@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FrHello.TencentYunCosSDK.Service;
+﻿using FrHello.TencentYunCosSDK.Service;
 using Xunit;
 
 namespace FrHello.TencentYunCosSDK.Test.Service
