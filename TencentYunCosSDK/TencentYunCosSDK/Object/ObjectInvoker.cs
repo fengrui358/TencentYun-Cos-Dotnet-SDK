@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using FrHello.TencentYunCosSDK.Authorization;
 using FrHello.TencentYunCosSDK.Common;
 
 namespace FrHello.TencentYunCosSDK.Object
@@ -22,7 +23,9 @@ namespace FrHello.TencentYunCosSDK.Object
                 BaseAddress = new Uri("http://tigo-private-1251827262.cos.ap-chengdu.myqcloud.com")
             })
             {
-                using (var response = await client.GetAsync("/455646546465/新建文本文档 (2).txt", cancellationToken))
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", Sign.Signature());
+
+                using (var response = await client.GetAsync("/test123", cancellationToken))
                 {
                     if (response.IsSuccessStatusCode)
                     {
@@ -30,7 +33,7 @@ namespace FrHello.TencentYunCosSDK.Object
                         var bytes = new byte[s.Length];
                         await s.ReadAsync(bytes, 0, bytes.Length);
 
-                        File.WriteAllBytes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "新建文本文档 (2).txt"), bytes);
+                        File.WriteAllBytes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test123.txt"), bytes);
                     }
                 }
             }
